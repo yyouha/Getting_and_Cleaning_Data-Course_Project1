@@ -63,18 +63,18 @@ str(dataFeaturesTrain)
 ####1.Merges the training and the test sets to create one data set.
 #####################################################################
 
-####1.Concatenate the data tables by rows
+#####Concatenate the data tables by rows
 dataSubject <- rbind(dataSubjectTrain, dataSubjectTest)
 dataActivity<- rbind(dataActivityTrain, dataActivityTest)
 dataFeatures<- rbind(dataFeaturesTrain, dataFeaturesTest)
 
-####2.set names to variables
+#####set names to variables
 names(dataSubject)<-c("subject")
 names(dataActivity)<- c("activity")
 dataFeaturesNames <- read.table(file.path(path_uhDataset, "features.txt"),head=FALSE)
 names(dataFeatures)<- dataFeaturesNames$V2
 
-####3.Merge columns to get the data frame Data for all data
+#####Merge columns to get the data frame Data for all data
 dataCombine <- cbind(dataSubject, dataActivity)
 Data <- cbind(dataFeatures, dataCombine)
 
@@ -82,24 +82,24 @@ Data <- cbind(dataFeatures, dataCombine)
 ####2.Extracts only the measurements on the mean and standard deviation for each measurement.
 ###########################################################################################
 
-####Subset Name of Features by measurements on the mean and standard deviation
-####i.e taken Names of Features with "mean()" or "std()"
+#####Subset Name of Features by measurements on the mean and standard deviation
+#####i.e taken Names of Features with "mean()" or "std()"
 subdataFeaturesNames<-dataFeaturesNames$V2[grep("mean\\(\\)|std\\(\\)", dataFeaturesNames$V2)]
 
-####Subset the data frame Data by seleted names of Features
+#####Subset the data frame Data by seleted names of Features
 selectedNames<-c(as.character(subdataFeaturesNames), "subject", "activity" )
 Data<-subset(Data,select=selectedNames)
 
-####Check the structures of the data frame Data
+#####Check the structures of the data frame Data
 str(Data)
 
 ###########################################################################################
 ####3. Uses descriptive activity names to name the activities in the data set
 ###########################################################################################
-####1.Read descriptive activity names from "activity_labels.txt"
+#####Read descriptive activity names from "activity_labels.txt"
 activityLabels <- read.table(file.path(path_uhDataset, "activity_labels.txt"),header = FALSE)
 
-####Factorize variable activity in the data frame Data using descriptive activity names
+#####Factorize variable activity in the data frame Data using descriptive activity names
 head(Data$activity,30)
 
 ###########################################################################################
