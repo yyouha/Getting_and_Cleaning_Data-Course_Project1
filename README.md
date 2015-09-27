@@ -36,29 +36,39 @@ unzip(zipfile="./data/m3a1_Dataset.zip",exdir="./data")
 
 ####By default the unzip folder name: UCI HAR Dataset
 path_uhDataset <- file.path("./data" , "UCI HAR Dataset")
+
 files<-list.files(path_uhDataset, recursive=TRUE)
+
 files #to list all the files inside UCI HAR Dataset folder
 
 
 ####Read the training data & test data (***the files do not contain header)
 ####Read subject files
 dataSubjectTrain <- read.table(file.path(path_uhDataset, "train", "subject_train.txt"),header = FALSE)
+
 dataSubjectTest  <- read.table(file.path(path_uhDataset, "test" , "subject_test.txt"),header = FALSE)
 
 ####Read activity files
 dataActivityTest  <- read.table(file.path(path_uhDataset, "test" , "Y_test.txt" ),header = FALSE)
+
 dataActivityTrain <- read.table(file.path(path_uhDataset, "train", "Y_train.txt"),header = FALSE)
 
 ####Read data files.
 dataFeaturesTest  <- read.table(file.path(path_uhDataset, "test" , "X_test.txt" ),header = FALSE)
+
 dataFeaturesTrain <- read.table(file.path(path_uhDataset, "train", "X_train.txt"),header = FALSE)
 
 ####View the structure of the table to check for the data
 str(dataSubjectTrain)
+
 str(dataSubjectTest)
+
 str(dataActivityTest)
+
 str(dataActivityTrain)
+
 str(dataFeaturesTest)
+
 str(dataFeaturesTrain)
 
 #####################################################################
@@ -67,17 +77,23 @@ str(dataFeaturesTrain)
 
 #####Concatenate the data tables by rows
 dataSubject <- rbind(dataSubjectTrain, dataSubjectTest)
+
 dataActivity<- rbind(dataActivityTrain, dataActivityTest)
+
 dataFeatures<- rbind(dataFeaturesTrain, dataFeaturesTest)
 
 #####set names to variables
 names(dataSubject)<-c("subject")
+
 names(dataActivity)<- c("activity")
+
 dataFeaturesNames <- read.table(file.path(path_uhDataset, "features.txt"),head=FALSE)
+
 names(dataFeatures)<- dataFeaturesNames$V2
 
 #####Merge columns to get the data frame Data for all data
 dataCombine <- cbind(dataSubject, dataActivity)
+
 Data <- cbind(dataFeatures, dataCombine)
 
 ###########################################################################################
@@ -90,6 +106,7 @@ subdataFeaturesNames<-dataFeaturesNames$V2[grep("mean\\(\\)|std\\(\\)", dataFeat
 
 #####Subset the data frame Data by seleted names of Features
 selectedNames<-c(as.character(subdataFeaturesNames), "subject", "activity" )
+
 Data<-subset(Data,select=selectedNames)
 
 #####Check the structures of the data frame Data
