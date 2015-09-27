@@ -130,3 +130,5 @@ Data2<-aggregate(. ~subject + activity, Data, mean)
 Data2<-Data2[order(Data2$subject,Data2$activity),]
 write.table(Data2, file = "./data/UCI HAR Dataset/tidydata.txt",row.name=FALSE)
 
+Done.
+
