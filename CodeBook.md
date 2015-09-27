@@ -1,6 +1,7 @@
-########################################
-code book describing the variables
-########################################
+----------------------------------------
+Code book describing the variables
+----------------------------------------
+
 Here are the data for the project: 
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 
@@ -18,7 +19,7 @@ test/X_test.txt
 train/X_train.txt
 
 Variables:
-##############
+-----------
 
 dataSubjectTrain : to read the train/subject_train.txt files
 dataSubjectTest : to read the test/subject_test.txt files
