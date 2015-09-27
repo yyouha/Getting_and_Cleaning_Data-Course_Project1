@@ -26,7 +26,9 @@ Data URL: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20H
 
 ####Download zip file from given URL
 if(!file.exists("./data")){dir.create("./data")} #to create new data folder if not exist yet
+
 fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+
 download.file(fileUrl,destfile="./data/m3a1_Dataset.zip")
 
 ####Unzip the folder
@@ -109,13 +111,19 @@ head(Data$activity,30)
 ####In the former part, variables activity and subject and names of the activities have been labelled using descriptive names.
 ####In this part, Names of Feteatures will labelled using descriptive variable names.
 names(Data)<-gsub("^t", "time", names(Data))
+
 names(Data)<-gsub("^f", "frequency", names(Data))
+
 names(Data)<-gsub("Acc", "Accelerometer", names(Data))
+
 names(Data)<-gsub("Gyro", "Gyroscope", names(Data))
+
 names(Data)<-gsub("Mag", "Magnitude", names(Data))
+
 names(Data)<-gsub("BodyBody", "Body", names(Data))
 
 ####Check Data naming
+
 names(Data)
 
 ###########################################################################################
@@ -126,8 +134,11 @@ names(Data)
 ####In this part,a second, independent tidy data set will be created with the average of each variable for each activity and each subject based on the data set in step 4.
 
 library(plyr);
+
 Data2<-aggregate(. ~subject + activity, Data, mean)
+
 Data2<-Data2[order(Data2$subject,Data2$activity),]
+
 write.table(Data2, file = "./data/UCI HAR Dataset/tidydata.txt",row.name=FALSE)
 
 
